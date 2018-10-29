@@ -46,8 +46,21 @@ double output_weight[6][3] = {{8.7560958e-01,  4.7513786e-01,  -5.4133195e-01},
 double output[3] = {0.20044334, 0.22622249, -0.39760455};
 
 int main(void) {
+    // The dimensions of the neural network
+    const int INPUT_SIZE = 4;
+    const int HIDDEN_LAYER_1_SIZE = 12;
+    const int HIDDEN_LAYER_2_SIZE = 6;
+    const int OUTPUT_SIZE = 3;
+
+    // Constructing the neural network
     auto *network = new NeuralNetwork();
-    network->addNeuralLayer(4, 12, Activation::relu);
-    network->addNeuralLayer(6, Activation::relu);
-    network->addNeuralLayer(3, Activation::softmax);
+    network->addNeuralLayer(INPUT_SIZE, HIDDEN_LAYER_1_SIZE, Activation::relu);
+    network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, Activation::relu);
+    network->addNeuralLayer(OUTPUT_SIZE, Activation::softmax);
+
+    // TODO: Load weights
+
+    // Evaluating the neural network with a set of inputs
+    auto *evaluationInput = new double[INPUT_SIZE] { 1.5, 1.2, 5.3, 7.3 };
+    network->evaluate(evaluationInput);
 }
