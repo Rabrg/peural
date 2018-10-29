@@ -1,5 +1,6 @@
 
 #include "NeuralNetwork.h"
+#include "Activation.h"
 
 double input[4];
 
