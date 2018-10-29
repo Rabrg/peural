@@ -6,8 +6,8 @@ class Neuron {
 
 public:
     int input_size;
-    int *weights;
-    int bias;
+    double *weights;
+    double bias;
 
     Neuron(int input_size);
 };

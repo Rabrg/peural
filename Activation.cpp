@@ -1,9 +1,9 @@
 #include "Activation.h"
 
-int Activation::relu(Neuron neuron) {
+double Activation::relu(Neuron neuron) {
     return 0;
 }
 
-int Activation::softmax(Neuron neuron) {
+double Activation::softmax(Neuron neuron) {
     return 0;
 }

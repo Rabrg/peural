@@ -12,7 +12,7 @@ public:
 
     int (*activation)(Neuron);
 
-    NeuralLayer(int input_size, int layer_size, int (*activation)(Neuron));
+    NeuralLayer(int input_size, int layer_size, double (*activation)(Neuron));
 };
 
 
