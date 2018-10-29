@@ -9,7 +9,7 @@ class NeuralNetwork {
 public:
     std::vector<NeuralLayer> layers;
 
-    void addNeuralLayer(int layer_size, Neuron *neruons, int (*activation)(int));
+    NeuralNetwork addNeuralLayer(int layer_size, Neuron *neurons, int (*activation)(Neuron));
 };
 
 
