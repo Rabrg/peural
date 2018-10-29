@@ -9,7 +9,7 @@ public:
     int *weights;
     int bias;
 
-    Neuron(int input_size, int *weights, int bias);
+    Neuron(int input_size);
 };
 
 

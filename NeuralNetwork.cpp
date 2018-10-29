@@ -1,6 +1,11 @@
 #include "NeuralNetwork.h"
 
-NeuralNetwork NeuralNetwork::addNeuralLayer(int layer_size, Neuron *neurons, int (*activation)(Neuron)) {
-    layers.push_back(*new NeuralLayer(layer_size, neurons, activation));
+NeuralNetwork NeuralNetwork::addNeuralLayer(int layer_size, int (*activation)(Neuron)) {
+    layers.push_back(*new NeuralLayer(layers.back().layer_size, layer_size, activation));
+    return *this;
+}
+
+NeuralNetwork NeuralNetwork::addNeuralLayer(int input_size, int layer_size, int (*activation)(Neuron)) {
+    layers.push_back(*new NeuralLayer(input_size, layer_size, activation));
     return *this;
 }

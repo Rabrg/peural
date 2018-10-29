@@ -6,12 +6,13 @@
 class NeuralLayer {
 
 public:
+    int input_size;
     int layer_size;
-    Neuron *neruons;
+    Neuron **neurons;
 
     int (*activation)(Neuron);
 
-    NeuralLayer(int layer_size, Neuron *neruons, int (*activation)(Neuron));
+    NeuralLayer(int input_size, int layer_size, int (*activation)(Neuron));
 };
 
 

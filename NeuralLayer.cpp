@@ -1,5 +1,7 @@
 #include "NeuralLayer.h"
 
-NeuralLayer::NeuralLayer(int layer_size, Neuron *neruons, int (*activation)(Neuron)) : layer_size(layer_size),
-                                                                                       neruons(neruons),
-                                                                                       activation(activation) {}
+NeuralLayer::NeuralLayer(int input_size, int layer_size, int (*activation)(Neuron)) : input_size(input_size),
+                                                                                      layer_size(layer_size),
+                                                                                      activation(activation) {
+    neurons = new Neuron *[layer_size];
+}
