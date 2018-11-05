@@ -45,14 +45,13 @@ void NeuralNetwork::loadParameters(const std::string path) {
             in >> layer_biases[j];
         }
 
-        for (int i = 0; i < input_size; i++) {
+        for (int i = 0; i < hidden_size; i++) {
             auto neuron = layers[layer_index].neurons[i];
-            for (int j = 0; j < hidden_size; j++) {
-                neuron->weights[j] = layer_weights[i][j];
+            for (int j = 0; j < input_size; j++) {
+                double weight = layer_weights[j][i];
+                neuron->weights[j] = weight;
             }
-            for (int j = 0; j < hidden_size; j++) {
-                neuron->bias = layer_biases[j];
-            }
+            neuron->bias = layer_biases[i];
         }
     }
     in.close();

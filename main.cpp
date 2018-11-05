@@ -56,13 +56,17 @@ int main(void) {
     // Constructing the neural network
     auto *network = new NeuralNetwork();
     network->addNeuralLayer(INPUT_SIZE, HIDDEN_LAYER_1_SIZE, Activation::relu);
-    network->addNeuralLayer(HIDDEN_LAYER_1_SIZE, HIDDEN_LAYER_2_SIZE, Activation::relu);
-    network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, OUTPUT_SIZE, Activation::softmax);
+    network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, Activation::relu);
+    network->addNeuralLayer(OUTPUT_SIZE, Activation::softmax);
 
     network->loadParameters("network.txt");
     std::cout << "loaded params" << std::endl;
 
     // Evaluating the neural network with a set of inputs
-    auto *evaluationInput = new double[INPUT_SIZE] { 1.5, 1.2, 5.3, 7.3 };
-    network->evaluate(evaluationInput);
+//    auto *evaluationInput = new double[INPUT_SIZE] { 5.1, 3.5, 1.4, 0.2 };
+//    auto *evaluationInput = new double[INPUT_SIZE] { 4.9, 3.0, 1.4, 0.2 };
+    auto *evaluationInput = new double[INPUT_SIZE] { 5.9, 3.0, 5.1, 1.8 };
+    double *output = network->evaluate(evaluationInput);
+    for (int i = 0; i < OUTPUT_SIZE; i++)
+        std::cout << output[i] << " ";
 }
