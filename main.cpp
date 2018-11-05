@@ -1,4 +1,5 @@
 
+#include <iostream>
 #include "NeuralNetwork.h"
 #include "Activation.h"
 
@@ -55,10 +56,11 @@ int main(void) {
     // Constructing the neural network
     auto *network = new NeuralNetwork();
     network->addNeuralLayer(INPUT_SIZE, HIDDEN_LAYER_1_SIZE, Activation::relu);
-    network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, Activation::relu);
-    network->addNeuralLayer(OUTPUT_SIZE, Activation::softmax);
+    network->addNeuralLayer(HIDDEN_LAYER_1_SIZE, HIDDEN_LAYER_2_SIZE, Activation::relu);
+    network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, OUTPUT_SIZE, Activation::softmax);
 
-    // TODO: Load weights
+    network->loadParameters("network.txt");
+    std::cout << "loaded params" << std::endl;
 
     // Evaluating the neural network with a set of inputs
     auto *evaluationInput = new double[INPUT_SIZE] { 1.5, 1.2, 5.3, 7.3 };

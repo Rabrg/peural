@@ -10,9 +10,11 @@ public:
     int layer_size;
     Neuron **neurons;
 
-    double (*activation)(Neuron);
+    double (*activation)(double);
 
-    NeuralLayer(int input_size, int layer_size, double (*activation)(Neuron));
+    NeuralLayer(int input_size, int layer_size, double (*activation)(double));
+
+    double* forward(double* input);
 };
 
 

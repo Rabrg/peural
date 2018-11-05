@@ -1,9 +1,10 @@
 #include "Activation.h"
+#include <cmath>
 
-double Activation::relu(Neuron neuron) {
+double Activation::relu(double i) {
     return 0;
 }
 
-double Activation::softmax(Neuron neuron) {
-    return 0;
+double Activation::softmax(double i) {
+    return exp(i);
 }

@@ -10,6 +10,8 @@ public:
     double bias;
 
     Neuron(int input_size);
+
+    double forward(double *input);
 };
 
 

@@ -7,9 +7,9 @@
 class Activation {
 
 public:
-    static double relu(Neuron neuron);
+    static double relu(double i);
 
-    static double softmax(Neuron neuron);
+    static double softmax(double u);
 
 private:
     Activation();
