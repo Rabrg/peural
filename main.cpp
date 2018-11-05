@@ -69,4 +69,14 @@ int main(void) {
     double *output = network->evaluate(evaluationInput);
     for (int i = 0; i < OUTPUT_SIZE; i++)
         std::cout << output[i] << " ";
+
+    evaluationInput = new double[INPUT_SIZE] { 4.9, 3.0, 1.4, 0.2 };
+    output = network->evaluate(evaluationInput);
+    for (int i = 0; i < OUTPUT_SIZE; i++)
+        std::cout << output[i] << " ";
+
+    evaluationInput = new double[INPUT_SIZE] { 5.1, 3.5, 1.4, 0.2 };
+    output = network->evaluate(evaluationInput);
+    for (int i = 0; i < OUTPUT_SIZE; i++)
+        std::cout << output[i] << " ";
 }

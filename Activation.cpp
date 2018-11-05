@@ -2,7 +2,7 @@
 #include <cmath>
 
 double Activation::relu(double i) {
-    return 0;
+    return std::fmax(i, 0.0);
 }
 
 double Activation::softmax(double i) {
