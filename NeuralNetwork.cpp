@@ -49,10 +49,27 @@ void NeuralNetwork::loadParameters(const std::string path) {
             auto neuron = layers[layer_index].neurons[i];
             for (int j = 0; j < input_size; j++) {
                 double weight = layer_weights[j][i];
+//                std::cout << weight << std::endl;
                 neuron->weights[j] = weight;
             }
             neuron->bias = layer_biases[i];
         }
     }
     in.close();
+}
+
+void NeuralNetwork::printParams() {
+    for (int i = 0; i < layers.size(); i++) {
+        auto layer = layers[i];
+        int layer_size = layer.layer_size;
+        int input_size = layer.input_size;
+        for (int j = 0; j < layer_size; j++) {
+            auto neuron = layer.neurons[j];
+            for (int k = 0; k < input_size; k++) {
+                std::cout << neuron->weights[k] << " ";
+            }
+            std::cout << std::endl;
+            std::cout << neuron->bias << std::endl;
+        }
+    }
 }

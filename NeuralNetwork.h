@@ -17,6 +17,8 @@ public:
     double* evaluate(double* input);
 
     void loadParameters(const std::string path);
+
+    void printParams();
 };
 
 

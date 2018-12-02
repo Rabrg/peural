@@ -62,21 +62,20 @@ int main(void) {
     network->loadParameters("network.txt");
     std::cout << "loaded params" << std::endl;
 
+    network->printParams();
     // Evaluating the neural network with a set of inputs
-//    auto *evaluationInput = new double[INPUT_SIZE] { 5.1, 3.5, 1.4, 0.2 };
-//    auto *evaluationInput = new double[INPUT_SIZE] { 4.9, 3.0, 1.4, 0.2 };
     auto *evaluationInput = new double[INPUT_SIZE] { 5.9, 3.0, 5.1, 1.8 };
-    double *output = network->evaluate(evaluationInput);
-    for (int i = 0; i < OUTPUT_SIZE; i++)
-        std::cout << output[i] << " ";
-
-    evaluationInput = new double[INPUT_SIZE] { 4.9, 3.0, 1.4, 0.2 };
-    output = network->evaluate(evaluationInput);
-    for (int i = 0; i < OUTPUT_SIZE; i++)
-        std::cout << output[i] << " ";
-
-    evaluationInput = new double[INPUT_SIZE] { 5.1, 3.5, 1.4, 0.2 };
-    output = network->evaluate(evaluationInput);
-    for (int i = 0; i < OUTPUT_SIZE; i++)
-        std::cout << output[i] << " ";
+    auto *evaluationOutput = network->evaluate(evaluationInput);
+//    for (int i = 0; i < OUTPUT_SIZE; i++)
+//        std::cout << output[i] << " ";
+//
+//    evaluationInput = new double[INPUT_SIZE] { 4.9, 3.0, 1.4, 0.2 };
+//    output = network->evaluate(evaluationInput);
+//    for (int i = 0; i < OUTPUT_SIZE; i++)
+//        std::cout << output[i] << " ";
+//
+//    evaluationInput = new double[INPUT_SIZE] { 5.1, 3.5, 1.4, 0.2 };
+//    output = network->evaluate(evaluationInput);
+//    for (int i = 0; i < OUTPUT_SIZE; i++)
+//        std::cout << output[i] << " ";
 }
