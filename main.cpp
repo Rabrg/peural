@@ -2,6 +2,11 @@
 #include <iostream>
 #include "NeuralNetwork.h"
 #include "Activation.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+#include <sys/time.h>
+
 
 double input[4];
 
@@ -47,7 +52,14 @@ double output_weight[6][3] = {{8.7560958e-01,  4.7513786e-01,  -5.4133195e-01},
 double output[3] = {0.20044334, 0.22622249, -0.39760455};
 
 int main(void) {
+    omp_set_num_threads(1);
     // The dimensions of the neural network
+//    const int INPUT_SIZE = 784;
+//    const int HIDDEN_LAYER_1_SIZE = 392;
+//    const int HIDDEN_LAYER_2_SIZE = 196;
+//    const int HIDDEN_LAYER_3_SIZE = 98;
+//    const int HIDDEN_LAYER_4_SIZE = 49;
+//    const int OUTPUT_SIZE = 10;
     const int INPUT_SIZE = 4;
     const int HIDDEN_LAYER_1_SIZE = 12;
     const int HIDDEN_LAYER_2_SIZE = 6;
@@ -57,15 +69,28 @@ int main(void) {
     auto *network = new NeuralNetwork();
     network->addNeuralLayer(INPUT_SIZE, HIDDEN_LAYER_1_SIZE, Activation::relu);
     network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, Activation::relu);
+//    network->addNeuralLayer(HIDDEN_LAYER_3_SIZE, Activation::relu);
+//    network->addNeuralLayer(HIDDEN_LAYER_4_SIZE, Activation::relu);
     network->addNeuralLayer(OUTPUT_SIZE, Activation::softmax);
 
     network->loadParameters("network.txt");
-    std::cout << "loaded params" << std::endl;
 
-    network->printParams();
+//    std::cout << "loaded params" << std::endl;
+//
+//    network->printParams();
     // Evaluating the neural network with a set of inputs
-    auto *evaluationInput = new double[INPUT_SIZE] { 5.9, 3.0, 5.1, 1.8 };
-    auto *evaluationOutput = network->evaluate(evaluationInput);
+
+    auto *evaluationInput = new double[INPUT_SIZE];
+    double start = omp_get_wtime();
+
+    for (int i = 0; i < 1000; i++) {
+        auto *evaluationOutput = network->evaluate(evaluationInput);
+    }
+
+
+    double finish = omp_get_wtime();
+    printf("Elapsed: %f\n", (finish - start));
+
 //    for (int i = 0; i < OUTPUT_SIZE; i++)
 //        std::cout << output[i] << " ";
 //

@@ -12,15 +12,20 @@ NeuralLayer::NeuralLayer(int input_size, int layer_size, double (*activation)(do
     }
 }
 
+// talk about why we have to parraleize this
 double *NeuralLayer::forward(double *input) {
     auto output = new double[layer_size];
+    int i;
+#pragma omp parallel private(i)
+    {
+# pragma omp for
+        for (i = 0; i < layer_size; i++) {
+            Neuron *neuron = neurons[i];
+            double value = neuron->forward(input);
+            value += neuron->bias;
 
-    for (int i = 0; i < layer_size; i++) {
-        Neuron *neuron = neurons[i];
-        double value = neuron->forward(input);
-        value += neuron->bias;
-
-        output[i] = activation(value);
+            output[i] = activation(value);
+        }
     }
 
     if (activation == Activation::softmax) {
