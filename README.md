@@ -41,6 +41,7 @@ you can look at it yourself and understand it but I will outline the key ideas
 
 ###### 2. read all images into a vector
 
+the csv file can be downloaded from [https://pjreddie.com/projects/mnist-in-csv/](https://pjreddie.com/projects/mnist-in-csv/)
 ```c++
     string infile = "mnist.csv"; //the path to the image csv file
     vector<ImageGrayscale8Bit> images = ImageIO::readMINSTCSV(infile);
