@@ -20,3 +20,43 @@ Example usage:
     auto *evaluationInput = new double[INPUT_SIZE] { 1.5, 1.2, 5.3, 7.3 };
     network->evaluate(evaluationInput);
 ```
+
+#### mnist
+
+the mnist dataset is sourced from `https://pjreddie.com/projects/mnist-in-csv/`  originally it was realeased in a binary
+format, but a nice lad  transferred it to a `csv` file format to make it easy to read
+
+* `minstdriver.cpp` : is a simple program that illustrates how reading in the images.
+
+
+you can look at it yourself and understand it but I will outline the key ideas
+
+### follow these steps to use mnist
+
+###### 1. import header files
+ ```c++
+#include "ImageGrayscale8Bit.h"
+#include "ImageIO.h"
+```
+
+###### 2. read all images into a vector
+
+the csv file can be downloaded from [https://pjreddie.com/projects/mnist-in-csv/](https://pjreddie.com/projects/mnist-in-csv/)
+```c++
+    string infile = "mnist.csv"; //the path to the image csv file
+    vector<ImageGrayscale8Bit> images = ImageIO::readMINSTCSV(infile);
+```
+
+###### 3. Do what you need to with the images
+*here are some of the methods that will be useful for `ImageGrayscale8Bit`*
+
+```c++
+    //properties
+    int getWidth() const;
+    int getHeight() const;
+    int size() const;
+
+    //pixel getters
+    unsigned char getIntensity(int x, int y) const;
+    unsigned char getIntensity(int index) const;
+```
