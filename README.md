@@ -1,6 +1,24 @@
 # parrallel processing project
 
-Example usage:
+## running the program
+
+The the program starts at main.cpp
+
+The program expects three input parameters as follows
+
+```sh
+#./peural [threads] [iris-or-mnist] [num-evals]
+
+./peural 12 1 4000
+# runs iris dataset for 4000 evaluations on 12 threads
+
+./peural 6 2 8000
+# runs mnist dataset for 8000 evaluations on 6 threads
+```
+
+
+
+## Programming Example usage:
 ```cpp
     // The dimensions of the neural network
     const int INPUT_SIZE = 4;

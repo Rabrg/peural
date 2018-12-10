@@ -51,26 +51,40 @@ double output_weight[6][3] = {{8.7560958e-01,  4.7513786e-01,  -5.4133195e-01},
 
 double output[3] = {0.20044334, 0.22622249, -0.39760455};
 
-int main(void) {
-    omp_set_num_threads(1);
+/**
+ * Parameters
+ * -------------
+ * threads - how many threads you want to run
+ * iris or mnist - 1 or iris, 2 for mnist
+ * num-evals - how many items do you want to classify
+ */
+int main(int arc, char *argv[]) {
+    if (arc != 4) {
+        std::cout << "we need 3 parameters passed see source code comment for descriptions" << std::endl;
+        return 0;
+    }
+    int numThreads = std::stoi(argv[1]);
+    int irisOrMnist = std::stoi(argv[2]);
+    int numEvals = std::stoi(argv[3]);
+
+    omp_set_num_threads(numThreads);
     // The dimensions of the neural network
-//    const int INPUT_SIZE = 784;
-//    const int HIDDEN_LAYER_1_SIZE = 392;
-//    const int HIDDEN_LAYER_2_SIZE = 196;
-//    const int HIDDEN_LAYER_3_SIZE = 98;
-//    const int HIDDEN_LAYER_4_SIZE = 49;
-//    const int OUTPUT_SIZE = 10;
-    const int INPUT_SIZE = 4;
-    const int HIDDEN_LAYER_1_SIZE = 12;
-    const int HIDDEN_LAYER_2_SIZE = 6;
-    const int OUTPUT_SIZE = 3;
+    const int INPUT_SIZE = irisOrMnist == 1 ? 4 : 784;
+    const int HIDDEN_LAYER_1_SIZE = irisOrMnist == 1 ? 12 : 392;
+    const int HIDDEN_LAYER_2_SIZE = irisOrMnist == 1 ? 6 : 196;
+    const int HIDDEN_LAYER_3_SIZE = 98;
+    const int HIDDEN_LAYER_4_SIZE = 49;
+    const int OUTPUT_SIZE = irisOrMnist == 1 ? 3 : 10;
+
 
     // Constructing the neural network
     auto *network = new NeuralNetwork();
     network->addNeuralLayer(INPUT_SIZE, HIDDEN_LAYER_1_SIZE, Activation::relu);
     network->addNeuralLayer(HIDDEN_LAYER_2_SIZE, Activation::relu);
-//    network->addNeuralLayer(HIDDEN_LAYER_3_SIZE, Activation::relu);
-//    network->addNeuralLayer(HIDDEN_LAYER_4_SIZE, Activation::relu);
+    if(irisOrMnist == 2) {
+        network->addNeuralLayer(HIDDEN_LAYER_3_SIZE, Activation::relu);
+        network->addNeuralLayer(HIDDEN_LAYER_4_SIZE, Activation::relu);
+    }
     network->addNeuralLayer(OUTPUT_SIZE, Activation::softmax);
 
     network->loadParameters("network.txt");
@@ -83,13 +97,13 @@ int main(void) {
     auto *evaluationInput = new double[INPUT_SIZE];
     double start = omp_get_wtime();
 
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < numEvals; i++) {
         auto *evaluationOutput = network->evaluate(evaluationInput);
     }
 
 
     double finish = omp_get_wtime();
-    printf("Elapsed: %f\n", (finish - start));
+    printf("Evalated %d Elapsed: %f\n", numEvals,(finish - start));
 
 //    for (int i = 0; i < OUTPUT_SIZE; i++)
 //        std::cout << output[i] << " ";
